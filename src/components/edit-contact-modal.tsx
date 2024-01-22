@@ -1,5 +1,8 @@
 import * as Dialog from "@radix-ui/react-dialog";
 import { Pen, X } from "lucide-react";
+import Button from "./Button";
+import { DialogOverlay } from "./dialog-overlay";
+import DialogContent from "./dialog-content";
 
 interface EditContactModaluser {
   user: {
@@ -18,8 +21,8 @@ function EditContactModal({ user }: EditContactModaluser) {
         </button>
       </Dialog.Trigger>
       <Dialog.Portal>
-        <Dialog.Overlay className="fixed inset-0 bg-black/50 data-[state=closed]:animate-[dialog-overlay-hide_200ms] data-[state=open]:animate-[dialog-overlay-show_200ms]" />
-        <Dialog.Content className="fixed flex flex-col gap-4 w-96 rounded-md left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2 p-8 bg-white data-[state=closed]:animate-[dialog-content-hide_200ms] data-[state=open]:animate-[dialog-content-show_200ms]">
+        <DialogOverlay />
+        <DialogContent className="w-96">
           <div className="flex justify-between items-center">
             <Dialog.Title className="text-xl">Editar contato</Dialog.Title>
             <Dialog.Close>
@@ -57,17 +60,13 @@ function EditContactModal({ user }: EditContactModaluser) {
               />
             </label>
           </form>
-          <div className="justify-end mt-4 flex gap-4">
+          <div className="justify-end mt-4 flex gap-4 ">
             <Dialog.Close>
-              <button className="px-4 py-2 bg-white rounded-md hover:bg-zinc-200 text-zinc-800">
-                Cancel
-              </button>
+              <Button variant="cancel">Cancel</Button>
             </Dialog.Close>
-            <button className="px-4 py-2 bg-blue-500 rounded-md hover:bg-blue-600 text-white">
-              Save
-            </button>
+            <Button>Save</Button>
           </div>
-        </Dialog.Content>
+        </DialogContent>
       </Dialog.Portal>
     </Dialog.Root>
   );
